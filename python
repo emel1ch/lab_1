@@ -1,0 +1,48 @@
+class Bank:
+    def __init__(self, name: str, interest_rate: float):
+        self.name = name
+        self.interest_rate = interest_rate
+        self.number_of_deposits = 0
+        self.single_deposit_amount = 0
+    def set_number_of_deposits(self, count: int):
+        if 0 <= count <= 10000:
+            self.number_of_deposits = count
+        else:
+            print("Ошибка: Число вкладов не может быть отрицательным или превышать 10000.")
+    def set_single_deposit_amount(self, amount: float):
+        if 0 <= amount <= 10000:
+            self.single_deposit_amount = amount
+        else:
+            print("Ошибка: Размер вклада не может быть отрицательным или превышать 10000.")
+
+    def calculate_total_interest_payout(self) -> float:
+        total_deposit_sum = self.number_of_deposits * self.single_deposit_amount
+        payout = total_deposit_sum * (self.interest_rate / 100.0)
+        return payout
+    def get_name(self) -> str:
+        return self.name
+
+    def display_info(self):
+        print("----------------------------------")
+        print(f'Банк: "{self.name}"')
+        print(f"Ставка по вкладам: {self.interest_rate}%")
+        print(f"Количество вкладов: {self.number_of_deposits}")
+        print(f"Размер одного вклада: {self.single_deposit_amount} у.е.")
+        print("----------------------------------")
+
+if __name__ == "__main__":
+    bank_a = Bank("Надежный Банк", 5.0)
+    bank_b = Bank("Т-банк", 8.0)
+    bank_a.set_number_of_deposits(250)
+    bank_b.set_number_of_deposits(680)
+    bank_a.set_single_deposit_amount(10000)
+    bank_b.set_single_deposit_amount(5000)
+
+    bank_a.display_info()
+    payout_a = bank_a.calculate_total_interest_payout()
+    bank_b.display_info()
+    payout_b = bank_b.calculate_total_interest_payout()
+
+    print(f'Общая выплата по процентам в "{bank_a.get_name()}": {payout_a:.2f} у.е.\n')
+    print(f'Общая выплата по процентам в "{bank_b.get_name()}": {payout_b:.2f} у.е.\n')
+
